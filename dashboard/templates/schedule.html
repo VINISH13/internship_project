@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Schedule</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
+}
+
+/* 🔵 Banner */
+.banner {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: white;
+    padding: 20px 30px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    padding: 30px;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.date {
+    font-weight: bold;
+}
+
+.present {
+    color: green;
+    font-weight: bold;
+}
+
+.absent {
+    color: red;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="banner">📅 Daily Schedule</div>
+
+<div class="container">
+
+{% for i in data %}
+<div class="card">
+    <div class="date">{{ i.date }}</div>
+
+    {% if i.status == "Present" %}
+        <div class="present">Present</div>
+    {% else %}
+        <div class="absent">Absent</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

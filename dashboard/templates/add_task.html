@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Task</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f5f7fb;
+    padding: 50px;
+}
+
+/* Box */
+.box {
+    background: white;
+    padding: 30px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Inputs */
+input, textarea, select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+/* Button */
+button {
+    padding: 10px;
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+/* Label */
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Add Task</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Title -->
+        <label>Task Title</label>
+        <input type="text" name="title" placeholder="Task Title" required>
+
+        <!-- Description -->
+        <label>Description</label>
+        <textarea name="description" placeholder="Description"></textarea>
+
+        <!-- 🔥 USER SELECT -->
+        <label>Assign User</label>
+        <select name="user" required>
+            <option value="">Select User</option>
+            {% for u in users %}
+                <option value="{{ u.id }}">{{ u.username }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- 🔥 DEADLINE (NEW) -->
+        <label>Deadline</label>
+        <input type="date" name="deadline">
+
+        <!-- Submit -->
+        <button type="submit">Add Task</button>
+    </form>
+</div>
+
+</body>
+</html>

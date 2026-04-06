@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Report</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
+}
+
+/* 🔵 Banner */
+.banner {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: white;
+    padding: 20px 30px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    padding: 30px;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.value {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.percent {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="banner">📊 Monthly Report</div>
+
+<div class="container">
+
+<div class="card">
+    <div class="value">Total Days: {{ total }}</div>
+    <div class="value">Present Days: {{ present }}</div>
+    <div class="percent">Attendance: {{ percent }}%</div>
+</div>
+
+</div>
+
+</body>
+</html>

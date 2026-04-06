@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tasks</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+}
+
+/* 🔵 Banner */
+.banner {
+    background: #1e3a8a;
+    color: white;
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ➕ Add button */
+.add-btn {
+    background: white;
+    color: #1e3a8a;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* 📦 Layout */
+.board {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+}
+
+/* 📌 Column */
+.column {
+    flex: 1;
+    background: #eef2ff;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Title */
+.column h3 {
+    text-align: center;
+}
+
+/* Task card */
+.task {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+
+/* Title */
+.title {
+    font-weight: bold;
+}
+
+/* Buttons */
+.actions a {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    text-decoration: none;
+    color: #2563eb;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔵 HEADER -->
+<div class="banner">
+    📝 Task Board
+
+    {% if request.user.is_superuser %}
+        <a href="/add-task/" class="add-btn">➕ Add Task</a>
+    {% endif %}
+</div>
+
+<!-- 📦 BOARD -->
+<div class="board">
+
+    <!-- TODO -->
+    <div class="column">
+        <h3>🟡 Todo</h3>
+
+        {% for t in todo %}
+        <div class="task">
+            <div class="title">{{ t.title }}</div>
+            <div>{{ t.description }}</div>
+
+            <div class="actions">
+                <a href="/update-task/{{ t.id }}/In Progress/">➡ Move to In Progress</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+    <!-- IN PROGRESS -->
+    <div class="column">
+        <h3>🔵 In Progress</h3>
+
+        {% for t in inprogress %}
+        <div class="task">
+            <div class="title">{{ t.title }}</div>
+            <div>{{ t.description }}</div>
+
+            <div class="actions">
+                <a href="/update-task/{{ t.id }}/Completed/">✔ Mark Completed</a>
+                <a href="/update-task/{{ t.id }}/Todo/">↩ Back to Todo</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+    <!-- COMPLETED -->
+    <div class="column">
+        <h3>🟢 Completed</h3>
+
+        {% for t in completed %}
+        <div class="task">
+            <div class="title">{{ t.title }}</div>
+            <div>{{ t.description }}</div>
+
+            <div class="actions">
+                <a href="/update-task/{{ t.id }}/In Progress/">↩ Move to In Progress</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No tasks</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>

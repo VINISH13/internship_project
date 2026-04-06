@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Attendance</title>
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #f5f7fa;
+}
+
+/* 🔵 TOP BANNER */
+.banner {
+    background: linear-gradient(135deg, #0a1f44, #123a7a);
+    color: white;
+    padding: 30px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* 📦 CONTAINER */
+.container {
+    padding: 30px 50px;
+}
+
+/* 📊 TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #e6ecf5;
+}
+
+tr {
+    border-bottom: 1px solid #eee;
+}
+
+/* STATUS COLORS */
+.present {
+    color: green;
+    font-weight: bold;
+}
+
+.absent {
+    color: red;
+    font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="banner">
+    📅 Attendance (30 Days)
+</div>
+
+<div class="container">
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Day</th>
+        <th>Status</th>
+    </tr>
+
+    {% for i in data %}
+    <tr>
+        <td>{{ i.date }}</td>
+        <td>{{ i.date|date:"l" }}</td>
+
+        {% if i.status|lower == "present" %}
+            <td class="present">{{ i.status }}</td>
+        {% else %}
+            <td class="absent">{{ i.status }}</td>
+        {% endif %}
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">No attendance data</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+</body>
+</html>
